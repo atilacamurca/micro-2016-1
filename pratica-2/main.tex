@@ -6,6 +6,7 @@
 \usepackage{graphicx, xcolor}
 \usepackage{ctable}
 \usepackage{float}
+\usepackage{caption}
 
 % -- hyperlink text
 \usepackage[colorlinks,
@@ -13,30 +14,18 @@
   hyperindex,
   pdfdisplaydoctitle,
   pageanchor,
-  linkcolor=blue]{hyperref}
+  linkcolor=blue,
+  citecolor=blue]{hyperref}
 % -- hyperlink text
 \usepackage{url}
 
-\usepackage{color}
-\usepackage{fancyvrb}
-\DefineShortVerb[commandchars=\\\{\}]{\|}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\newenvironment{Shaded}{}{}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
-\newcommand{\RegionMarkerTok}[1]{{#1}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
-\newcommand{\NormalTok}[1]{{#1}}
+\definecolor{this.brown}{RGB}{25,25,25}
+
+% -- syntax highlight
+\usepackage{minted}
+\usemintedstyle{colorful}
+\newcommand{\inputccodefile}[1]{\inputminted[framesep=2pt,xleftmargin=1pt,rulecolor=\color{this.brown},tabsize=2]{c}{#1}}
+% -- syntax highlight
 
 \sloppy
 
@@ -49,23 +38,31 @@
 \maketitle
 
 \begin{abstract}
-  TODO
+  This practice has the goal to create a car and a pedestrian semaphore
+  using the SanUSB tool \cite{sanusb-mplabx:11} and a PIC18F4550 microcontroller
+  \cite{microchip-pic18f4550}, where the pedestrian can solicitate his passage
+  and view a 7 segments display which show the time left that he has to cross
+  a highway.
 \end{abstract}
      
 \begin{resumo}
-  Esta prática tem como objetivo criar uma semáforo de carros e pedestres, em
-  que o pedestre pode solicitar sua passagem e um display de 7 segmentos mostra
-  o tempo que ele tem para fazer a passagem. Imagine que este semáforo está em 
-  uma auto estrada de alta velocidade. Nesse cenário o sinal para os carros está
-  sempre verde e para os pedestres está sempre vermelho. Quando um pedestre solicita
-  a passagem através de um botão, o sinal para os carros sai do vermelho para o amarelo,
-  logo em seguida para o vermelho, enquanto isso o sinal dos pedestres vai para o
-  verde e um par de displays de 7 segmentos mostra o tempo que o pedestre tem para passar.
+  Esta prática tem como objetivo criar um semáforo de carros e pedestres usando
+  a ferramenta SanUSB \cite{sanusb-mplabx:11} e microcontrolador
+  PIC18F4550 \cite{microchip-pic18f4550}, em que o pedestre pode solicitar sua
+  passagem e visualizar um display de 7 segmentos que mostra
+  o tempo que ele tem para fazer a travessia de uma auto estrada.
 \end{resumo}
+
+\renewcommand\listoflistingscaption{Lista de códigos fonte}
+\listoflistings
 
 \include{content}
 
 \bibliographystyle{sbc}
 \bibliography{main}
+
+\appendix
+
+\include{chapters/appendix}
 
 \end{document}

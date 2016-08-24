@@ -1,4 +1,29 @@
 \begin{thebibliography}{}
 
-\bibitem[Grupo SanUSB 2011]{sanusb-mplabx:11} Aplicações Práticas de Eletrônica e Microcontroladores em Sistemas Computacionais, \url{https://www.dropbox.com/s/0e8r2sh94x9enof/2%20-%20Apostila_MPLABX.pdf?dl=0}, 27 07 2016.
+\bibitem[Microchip 2006]{microchip-pic18f4550}
+Microchip (2006).
+\newblock {PIC18F2455/2550/4455/4550 Data Sheet}.
+\newblock \url{http://ww1.microchip.com/downloads/en/devicedoc/39632c.pdf}.
+\newblock [Online; accessed 24-August-2016].
 
+\bibitem[Microship 2016]{mplabx-ide}
+Microship (2016).
+\newblock {MPLAB X Integrated Development Environment (IDE)}.
+\newblock \url{http://www.microchip.com/mplab/mplab-x-ide}.
+\newblock [Online; accessed 24-August-2016].
+
+\bibitem[SanUSB 2011]{sanusb-mplabx:11}
+SanUSB, G. (2011).
+\newblock {Aplicações Práticas de Eletrônica e Microcontroladores em
+  Sistemas Computacionais}.
+\newblock
+  \url{https://www.dropbox.com/s/0e8r2sh94x9enof/2%20-%20Apostila_MPLABX.pdf?dl=0}.
+\newblock [Online; accessed 27-July-2016].
+
+\bibitem[SanUSB 2016]{gravador-sanusb}
+SanUSB, G. (2016).
+\newblock {Gravador da plataforma SanUSB}.
+\newblock \url{https://github.com/SanUSB-grupo/Gravador-Linux}.
+\newblock [Online; accessed 24-August-2016].
+
+\end{thebibliography}
