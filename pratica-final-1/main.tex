@@ -1,0 +1,49 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{sbc-template}
+\usepackage{graphicx, xcolor}
+\usepackage{ctable}
+\usepackage{caption}
+\usepackage{longtable}
+
+% -- hyperlink text
+\usepackage[colorlinks,
+  urlcolor=blue,
+  hyperindex,
+  pdfdisplaydoctitle,
+  pageanchor,
+  linkcolor=blue,
+  citecolor=blue]{hyperref}
+% -- hyperlink text
+\usepackage{url}
+
+\definecolor{this.brown}{RGB}{25,25,25}
+
+% -- syntax highlight
+\usepackage{minted}
+\usemintedstyle{colorful}
+\newcommand{\inputccodefile}[1]{\inputminted[framesep=2pt,xleftmargin=1pt,rulecolor=\color{this.brown},tabsize=2]{c}{#1}}
+% -- syntax highlight
+
+\sloppy
+
+\title{Microcontroladores\\Prática Final 1 - Bateria Eletrônica para Jogo Frets On Fire usando a plataforma Arduino}
+\author{Átila Camurça Alves}
+\address{Instituto Federal do Ceará (IFCE)}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  TODO
+\end{abstract}
+     
+\begin{resumo}
+  TODO
+\end{resumo}
+
+\include{content}
+
+\end{document}

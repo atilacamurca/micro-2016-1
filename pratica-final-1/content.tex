@@ -1,0 +1,178 @@
+\section{Introdução}\label{introduuxe7uxe3o}
+
+O Jogo Frets On Fire tem o objetivo de simular que o jogador seja um
+astro do rock. A intenção é que ele possa tocar músicas simulando
+instrumentos como guitarra, baixo e bateria.
+
+Esse jogo usa o Teclado do computador como entrada das notas musicais. A
+bateria utiliza 5 comandos do teclado.
+
+Sendo assim é possível criar uma plataforma de entrada de dados usando
+um microcontrolador e piezos elétricos para captar as batidas do usuário
+e enviá-las para o jogo, ou seja, transformar sinais elétricos em
+comandos do teclado.
+
+\section{Material Necessário}\label{material-necessuxe1rio}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  5 Piezos Elétricos
+\item
+  1 Arduino
+\item
+  5 Resistores 
+\item
+  Fios
+\item
+  1 Breadboard
+\item
+  1 par de Baquetas
+\item
+  7 folhas de EVA (2 pretas, 1 vermelha, 1 amarela, 1 azul, 1 verde)
+\item
+  Pistola e bastões de cola quente
+\end{itemize}
+
+\section{Objetivos}\label{objetivos}
+
+O objetivo desse projeto é captar as batidas do usuário através dos
+piezos, enviar um sinal como se fosse o teclado relacionando o piezo a
+uma tecla.
+
+O jogo pode ser configurado para receber qualquer tecla. Com isso é
+posível até rodar o jogo em modo \emph{multiplayer}, sem que haja
+conflito de teclas. O jogador que irá simular a guitarra ou o baixo pode
+utilizar as teclas:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \texttt{1} (Nota Verde),
+\item
+  \texttt{2} (Nota Vermelha),
+\item
+  \texttt{3} (Nota Amarela),
+\item
+  \texttt{4} (Nota Azul),
+\item
+  \texttt{5} (Nota Laranja),
+\item
+  \texttt{/} (Palheta 1),
+\item
+  \texttt{*} (Palheta 2),
+\item
+  \texttt{-} (\emph{Star Power})
+\item
+  e \texttt{8} (Alavanca);
+\end{itemize}
+
+enquanto o jogador da bateria pode utilizar as teclas:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \texttt{a} (Nota Vermelha),
+\item
+  \texttt{e} (Nota Amarela),
+\item
+  \texttt{h} (Nota Azul),
+\item
+  \texttt{j} (Nota Verde),
+\item
+  \texttt{\textless{}espaço\textgreater{}} (Pedal),
+\end{itemize}
+
+por exemplo.
+
+\section{Cronograma}\label{cronograma}
+
+\begin{longtable}[c]{@{}lllll@{}}
+\toprule\addlinespace
+\begin{minipage}[b]{0.39\columnwidth}\raggedright
+Tarefas
+\end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\raggedright
+Semana 1
+\end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\raggedright
+Semana 2
+\end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\raggedright
+Semana 3
+\end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\raggedright
+Semana 4
+\end{minipage}
+\\\addlinespace
+\midrule\endhead
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
+Aquisição do Material
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+X
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+\end{minipage}
+\\\addlinespace
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
+Protótipo Inicial
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+X
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+\end{minipage}
+\\\addlinespace
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
+Montagem do circuito
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+X
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+\end{minipage}
+\\\addlinespace
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
+Programação
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+X
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+X
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+\end{minipage}
+\\\addlinespace
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
+Testes
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+X
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+\end{minipage}
+\\\addlinespace
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
+Relatório
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+X
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+X
+\end{minipage}
+\\\addlinespace
+\bottomrule
+\addlinespace
+\caption{Cronograma}
+\end{longtable}
+
+\section{Referências}\label{referuxeancias}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Frets On Fire
+\item
+  FoFiX
+\item
+  Arduino
+\item
+  Arduino IDE
+\end{itemize}
