@@ -1,8 +1,8 @@
 \section{Introdução}\label{introduuxe7uxe3o}
 
-O Jogo Frets On Fire tem o objetivo de simular que o jogador seja um
-astro do rock. A intenção é que ele possa tocar músicas simulando
-instrumentos como guitarra, baixo e bateria.
+O Jogo Frets On Fire \cite{fretsonfire-2006} tem o objetivo de simular
+que o jogador seja um astro do rock. A intenção é que ele possa tocar
+músicas simulando instrumentos como guitarra, baixo e bateria.
 
 Esse jogo usa o Teclado do computador como entrada das notas musicais. A
 bateria utiliza 5 comandos do teclado.
@@ -11,6 +11,9 @@ Sendo assim é possível criar uma plataforma de entrada de dados usando
 um microcontrolador e piezos elétricos para captar as batidas do usuário
 e enviá-las para o jogo, ou seja, transformar sinais elétricos em
 comandos do teclado.
+
+Uma versão modificada chamada FoFiX \cite{fofix-2006} também pode ser
+usada. Sua interface de usuário é mais amigável e mais profissional.
 
 \section{Material Necessário}\label{material-necessuxe1rio}
 
@@ -21,7 +24,7 @@ comandos do teclado.
 \item
   1 Arduino
 \item
-  5 Resistores 
+  5 Resistores 1M$\Omega$
 \item
   Fios
 \item
@@ -84,6 +87,15 @@ enquanto o jogador da bateria pode utilizar as teclas:
 \end{itemize}
 
 por exemplo.
+
+Usando Arduino \cite{arduino-2005} com sua plataforma de codificação e
+envio do código chamada Arduino IDE \cite{arduino-ide-2008} é bem
+simples captar os dados vindos dos piezos e enviar sinais do teclado.
+Uma API embutida já faz esse serviço, com uma sintaxe simples como:
+
+\begin{verbatim}
+Keyboard.write('A');            // same thing as a quoted character
+\end{verbatim}
 
 \section{Cronograma}\label{cronograma}
 
@@ -162,17 +174,3 @@ X
 \addlinespace
 \caption{Cronograma}
 \end{longtable}
-
-\section{Referências}\label{referuxeancias}
-
-\begin{itemize}
-\itemsep1pt\parskip0pt\parsep0pt
-\item
-  Frets On Fire
-\item
-  FoFiX
-\item
-  Arduino
-\item
-  Arduino IDE
-\end{itemize}
