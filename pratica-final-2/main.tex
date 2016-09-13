@@ -6,6 +6,7 @@
 \usepackage{ctable}
 \usepackage{caption}
 \usepackage{longtable}
+\usepackage{xspace}
 
 % -- hyperlink text
 \usepackage[colorlinks,
@@ -25,10 +26,11 @@
 \usemintedstyle{colorful}
 \newcommand{\inputccodefile}[1]{\inputminted[framesep=2pt,xleftmargin=1pt,rulecolor=\color{this.brown},tabsize=2]{c}{#1}}
 % -- syntax highlight
+\newcommand{\wm}{Wireless Monitor\xspace}
 
 \sloppy
 
-\title{Microcontroladores\\Prática Final 2 - Aplicativo web para receber e mostrar dados vindos de equipamentos IOT}
+\title{Microcontroladores\\Wireless Monitor - Aplicativo livre web para receber e mostrar dados vindos de equipamentos IOT}
 \author{Átila Camurça Alves}
 \address{Instituto Federal do Ceará (IFCE)}
 
@@ -37,14 +39,14 @@
 \maketitle
 
 \begin{abstract}
-  The Wireless Monitor app has the goal to allow a embed systems developer
+  The Wireless Monitor app has the goal to allow embed systems developer
   to send data to the cloud collected by his IOT device and preview in a
   browser.
 \end{abstract}
      
 \begin{resumo}
-  O aplicativo Wireless Monitor tem o objetivo de permitir que um
-  desenvolvedor de sistemas embarcados possam enviar para a nuvem
+  O aplicativo Wireless Monitor tem o objetivo de permitir que
+  desenvolvedores de sistemas embarcados possam enviar para a nuvem
   os dados obtidos por seu equipamento IOT e visualizá-los no navegador.
 \end{resumo}
 

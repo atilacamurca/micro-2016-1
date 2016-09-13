@@ -1,14 +1,27 @@
 \section{Introdução}\label{introduuxe7uxe3o}
 
-O aplicativo Wireless Monitor tem o objetivo de permitir que um
-desenvolvedor de sistemas embarcados possam enviar para a nuvem os dados
-obtidos por seu equipamento IOT e visualizá-los no navegador.
+O aplicativo \wm tem o objetivo de permitir que desenvolvedores de
+sistemas embarcados possam enviar para a nuvem os dados obtidos por seu
+equipamento IOT e visualizá-los no navegador.
+
+Em equipamentos que usam microcontroladores não existe a figura de um
+monitor em que se possa verificar a saída dos comandos e acompanhar sua
+execução, existem apenas saídas seriais ou placas wifi embutidas. Daí
+surge a necessidade de criar sistemas que possam recolher os dados
+enviados por esses equipamentos e mostrá-los de forma apropriada.
 
 \section{Objetivos}\label{objetivos}
 
-A ideia principal é criar uma \emph{api} leve e simples, visto que
-equipamentos IOT são limitados. Tendo isso em vista, vejamos os passos
-para criar um projeto.
+O objetivo principal é fornecer uma \emph{api} leve e simples, visto que
+equipamentos IOT são limitados, para enviar e receber informações da
+nuvem.
+
+Para que haja melhor intercâmbio das informações tanto partindo do
+equipamento IOT quanto chegando o protocolo de comunicação escolhido foi
+o JSON, que segundo Douglas Crockford é um formato leve e de linguagem
+independente para troca de informações \cite{crockford-2015}.
+
+Tendo isso em vista, vejamos os passos para criar um projeto.
 
 \subsection{Cadastro do desenvolvedor}\label{cadastro-do-desenvolvedor}
 
@@ -107,6 +120,66 @@ Figura \ref{fig:view-monitor}
     \includegraphics[scale=0.5]{img/wm-monitor-temperature.png}
     \caption{Visualização dos dados na web} \label{fig:view-monitor}
 \end{figure}
+
+\section{Justificativa}\label{justificativa}
+
+Sendo um aplicativo de código-fonte licenciado pela GPLv3 poderá ser
+usado tanto para professores e alunos de cursos superiores e técnicos
+para estudo de microcontroladores, sistemas embarcados e afins, como
+para empresas ou pessoas que queiram interagir com seus equipamentos
+pessoais.
+
+A linguagem de programação escolhida foi o PHP, a qual é fácil de
+aprender, normalmente lecionada em cursos superiores e técnicos e de
+hospedagem barata.
+
+Outra característica a ser levada em conta é a forma de autenticação.
+Uma autenticação convencional envolve a troca de \emph{cookies} entre
+servidor e cliente, além de espaço em disco para guardar tais
+informações. Em sistemas IOT que se supoem que possam crescer de forma
+rápida, ou seja, o número de equipamentos pode aumentar, é necessário um
+sistema de autenticação capaz de ser escalável mesmo em condições
+limitadas. Para isso foi utilizado o padrão JWT (ou \emph{JSON Web
+Tokens}), que é um padrão aberto (RFC 7519 \cite{rfc7519-2015}) que
+define uma maneira compacta e auto-contida de transmitir de forma segura
+informações entre pares através de um objeto JSON \cite{jwt-2016}. Esta
+informação pode ser verificada e confirmada pois é assinada
+digitalmente. Informações JWT podem ser assinadas usando um segredo (com
+o algoritmo HMAC \cite{rfc2104-1997}) ou um par de chave pública e
+privada usando RSA \cite{rfc3447-2003}.
+
+\begin{figure}[h]
+    \includegraphics[scale=0.3]{img/jwt-diagram.png}
+    \caption{Diagrama do processo de autenticação - Fonte: https://cdn.auth0.com/content/jwt/jwt-diagram.png}
+\end{figure}
+
+\section{Revisão Teórica}\label{revisuxe3o-teuxf3rica}
+
+Muitas são as soluções de monitoramento de equipamentos IOT, grandes
+empresas com Oracle, Amazon, Google, Microsoft; além de outras soluções
+livres como Kaa, ThingSpeak, macchina.io, SiteWhere
+\cite{postscapes-iot-2016}.
+
+O grande desafio é permitir a extensão da ferramenta para necessidades
+específicas. Ferramentas com o Kaa permitem criar módulos próprios,
+sistemas de análises e modelo de dados, fazendo com que a ferramenta se
+adapte ao que você precisa \cite{kaa-2014}.
+
+De forma semelhante outras ferramentas como macchina.io oferecem opções
+de criar \emph{bundles} \cite{macchina.io-2016}, o ThingSpeak oferece
+opção de criar \emph{apps}, que podem envolver visualização em gráficos
+e tomada de decisões \cite{thingspeak-2016}.
+
+Nesse sentido a ferramenta proposta possui um sistema de plugins, que
+são desenvolvidos como \emph{Laravel Packages}
+\cite{laravel-packages-2016}. Cada nova funcionalidade é criada através
+da ferramenta \emph{Laravel} e pode ser desenvolvida e habilitada
+localmente.
+
+A proposta é ter uma tela de acompanhamento dos dados captados do
+equipamento e a visualizaçãos ser específica. A documentação em
+português do brasil para criar um novo plugin pode ser encontrada em
+\url{https://sanusb-grupo.github.io/wireless-monitor/pt-br/plugin-development.html}.
 
 \section{Cronograma}\label{cronograma}
 
