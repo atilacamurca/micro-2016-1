@@ -1,12 +1,14 @@
 const five = require("johnny-five");
 const rp = require('request-promise');
+// const url = 'http://wireless-monitor.provisorio.ws';
+const url = 'http://localhost:8000';
 
 const auth = {
     method: 'POST',
-    uri: 'http://wireless-monitor.provisorio.ws/api/authenticate',
+    uri: url + '/api/authenticate',
     body: {
-        api_key: 'fa3076b3-ddb3-421f-a0ed-303a8dd04fb8',
-        'monitor_key': 'e98fb37c-e79c-4a80-ac7f-b8fbdb82d48b'
+        api_key: '',
+        monitor_key: ''
     },
     json: true
 };
@@ -16,7 +18,7 @@ const Monitor = function (token) {
     this.med = [];
     this.api = {
         method: 'POST',
-        uri: 'http://wireless-monitor.provisorio.ws/api/send',
+        uri: url + '/api/send',
         headers: {
             'Authorization': 'Bearer ' + this.token
         },
@@ -42,7 +44,7 @@ Monitor.prototype.send = function () {
     this.med = [];
     rp(this.api)
         .then(function (json) {
-            console.log(json);
+            console.log('response', json);
         })
         .catch(function (err) {
             console.log(err);
@@ -60,7 +62,7 @@ Monitor.prototype.calcMed = function () {
 rp(auth)
     .then(function(result) {
         var token = result.token;
-        console.log('token:', (token) ? 'token received' : 'oh no!');
+        console.log('token:', token);
         var monitor = new Monitor(token);
 
         five.Board().on("ready", function() {
