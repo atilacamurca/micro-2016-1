@@ -28,10 +28,11 @@
 % -- syntax highlight
 \newcommand{\wm}{Wireless Monitor\xspace}
 
+% -- This can prevent overfull boxes, but may leave too much space between words.
 \sloppy
 
 \title{Microcontroladores\\Wireless Monitor - Aplicativo livre web para receber e mostrar dados vindos de equipamentos IOT}
-\author{Átila Camurça Alves}
+\author{Átila Camurça Alves\inst{1}}
 \address{Instituto Federal do Ceará (IFCE)}
 
 \begin{document}
@@ -39,18 +40,32 @@
 \maketitle
 
 \begin{abstract}
-  The Wireless Monitor app has the goal to allow embed systems developer
-  to send data to the cloud collected by his IOT device and preview in a
-  browser.
+This article presents the \wm app that has the goal to allow
+embed systems developers to send data to the cloud collected by
+an IOT device and preview in a browser.
+
+In devices that use microcontrollers the figure of a monitor (screen)
+doesn't exist, which one can check the commands output e follow
+its execution, there's just serial outputs and embed wi-fi boards.
+From there rises the need to create systems that could gather data
+sended by this devices e show them in a appropriate way, there is,
+a web browser.
 \end{abstract}
      
 \begin{resumo}
-  O aplicativo Wireless Monitor tem o objetivo de permitir que
-  desenvolvedores de sistemas embarcados possam enviar para a nuvem
-  os dados obtidos por seu equipamento IOT e visualizá-los no navegador.
+Este artigo apresenta o aplicativo \wm que tem o objetivo de permitir que
+desenvolvedores de sistemas embarcados possam enviar para a nuvem
+os dados obtidos por equipamento IOT e visualizá-los no navegador.
+
+Em equipamentos que usam microcontroladores não existe a figura de
+um monitor (tela), em que se possa verificar a saída dos comandos e acompanhar
+sua execução, existem apenas saídas seriais ou placas wi-fi embutidas.
+Daí surge a necessidade de criar sistemas que possam recolher os dados
+enviados por esses equipamentos e mostrá-los de forma apropriada, isto é,
+um navegador de internet.
 \end{resumo}
 
-\include{content}
+\input{content}
 
 \bibliographystyle{sbc}
 \bibliography{main}

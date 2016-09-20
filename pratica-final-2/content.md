@@ -1,18 +1,18 @@
 # Introdução
 
-O aplicativo \wm tem o objetivo de permitir que
-desenvolvedores de sistemas embarcados possam enviar para a nuvem
-os dados obtidos por seu equipamento IOT e visualizá-los no navegador.
-
-Em equipamentos que usam microcontroladores não existe a figura de
-um monitor em que se possa verificar a saída dos comandos e acompanhar
-sua execução, existem apenas saídas seriais ou placas wifi embutidas.
-Daí surge a necessidade de criar sistemas que possam recolher os dados
-enviados por esses equipamentos e mostrá-los de forma apropriada.
+Com a crescente adoção de equipamentos IOT, como por exemplo o Raspberry Pi que
+em quase 5 anos vendeu 10 milhões de unidades pelo mundo \cite{raspberry-pi-blog:2016},
+para monitoramento de sensores e acionamento de cargas, cresce também a necessidade
+de ambientes de acompanhamentos de tais
+medições. Para isso uma das melhores formas é usar a nuvem para fazer o
+armazenamento, já que uma das caracteristicas dos equipamentos IOT é o acesso
+a internet. Para atender essa necessidade surge a ideia de criar um aplicativo
+web e livre que possa captar informações destes dispositivos e que o acesso
+possa acontecer em qualquer lugar.
 
 # Objetivos
 
-O objetivo principal é fornecer uma _api_ leve e simples, visto que
+O objetivo principal do \wm é fornecer uma _api_ leve, simples e segura, visto que
 equipamentos IOT são limitados, para enviar e receber informações da
 nuvem.
 
@@ -21,13 +21,85 @@ IOT quanto chegando o protocolo de comunicação escolhido foi o JSON, que segun
 Douglas Crockford é um formato leve e de linguagem independente para troca de
 informações \cite{crockford-2015}.
 
-Tendo isso em vista, vejamos os passos para criar um projeto.
+# Justificativa
+
+Sendo um aplicativo de código-fonte licenciado pela GPLv3 poderá ser usado
+tanto para professores e alunos de cursos superiores e técnicos para estudo
+de microcontroladores, sistemas embarcados e afins, como para empresas ou
+pessoas que queiram interagir com seus equipamentos pessoais.
+
+A linguagem de programação escolhida foi o PHP, a qual é fácil de aprender,
+normalmente lecionada em cursos superiores e técnicos e de hospedagem barata.
+
+Outra característica a ser levada em conta é a forma de autenticação.
+Uma autenticação convencional envolve a troca de _cookies_ entre servidor
+e cliente, além de espaço em disco para guardar tais informações. Em sistemas
+IOT que se supoem que possam crescer de forma rápida, ou seja, o número
+de equipamentos pode aumentar, é necessário um sistema de autenticação capaz
+de ser escalável mesmo em condições limitadas. Para isso foi utilizado o padrão
+JWT (ou _JSON Web Tokens_), que é um padrão aberto (RFC 7519 \cite{rfc7519-2015})
+que define uma maneira compacta e auto-contida
+de transmitir de forma segura informações entre pares através de um objeto
+JSON \cite{jwt-2016}. Esta informação pode ser verificada e confirmada pois é
+assinada digitalmente. Informações JWT podem ser assinadas usando um segredo
+(com o algoritmo HMAC \cite{rfc2104-1997}) ou um par de chave pública e
+privada usando RSA \cite{rfc3447-2003}.
+
+\begin{figure}[h]
+	\includegraphics[scale=0.3]{img/jwt-diagram.png}
+	\caption{Diagrama do processo de autenticação - Fonte: https://cdn.auth0.com/content/jwt/jwt-diagram.png}
+\end{figure}
+
+# Revisão Teórica
+
+Muitas são as soluções de monitoramento de equipamentos IOT, desde grandes empresas
+como Oracle, Amazon, Google, Microsoft; até soluções livres como
+Kaa, ThingSpeak, macchina.io, SiteWhere \cite{postscapes-iot-2016}.
+
+O grande desafio é permitir a extensão da ferramenta para necessidades específicas.
+Ferramentas com o Kaa permitem criar módulos próprios, sistemas de análises e
+modelo de dados, fazendo com que a ferramenta se adapte ao que você precisa
+\cite{kaa-2014}.
+
+De forma semelhante outras ferramentas como macchina.io oferecem opções de
+criar _bundles_ \cite{macchina.io-2016}, o ThingSpeak oferece opção de
+criar _apps_, que podem envolver visualização em gráficos e tomada de
+decisões \cite{thingspeak-2016}.
+
+Nesse sentido a ferramenta proposta possui um sistema de plugins, que são
+desenvolvidos como _Laravel Packages_ \cite{laravel-packages-2016}. Cada
+nova funcionalidade é criada através da ferramenta _Laravel_ e pode
+ser desenvolvida e habilitada localmente.
+
+A proposta é ter uma tela de acompanhamento dos dados captados do equipamento
+e a visualizaçãos ser específica. A documentação em português do brasil
+para criar um novo plugin pode ser encontrada em
+<https://sanusb-grupo.github.io/wireless-monitor/pt-br/plugin-development.html>.
+
+<!-- TODO: referenciar: https://blog.profitbricks.com/top-49-tools-internet-of-things/ -->
+
+# Arquitetura
+
+É necessário um Servidor, um equipamento IOT, seja ESP8266 ou Raspberry Pi com Arduino;
+e um navegador de internet no cliente.
+
+A arquitetura segue o modelo da Figura \ref{fig:arquitetura}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.45]{img/arquitetura.png}
+	\caption{Arquitetura} \label{fig:arquitetura}
+\end{figure}
+
+# Aplicação
+
+Vejamos um passo a passo de como o aplicativo funciona.
 
 ## Cadastro do desenvolvedor
 
 O desenvolvedor inicialmente deve fazer um cadastro simples na ferramenta.
 Esse cadastro irá criar para ele uma `api_key`, ou seja, uma chave
-única no formato UUIDv4.
+única no formato UUID 4 \cite{rfc4122:2005}.
 
 ## Criar um _Monitor_
 
@@ -88,98 +160,39 @@ o valor, algo do tipo:
 }
 ~~~
 
-Sumarizando o código final seria algo como:
+## Descrição dos componentes
 
-~~~
-HTTPClient http;
-http.begin("https://wireless-monitor.site/api/send");
-http.addHeader("Content-Type", "application/json");
-http.addHeader("Authorization", "Bearer <token>");
-http.POST("data={value:23.89}");
-http.writeToStream(&Serial);
-http.end();
-~~~
+Neste tópico são descritos os componentes e as ferramentas utilizadas para o
+desenvolvimento e uso do plugin de Temperatura.
+
+### Sistema embarcado linux
+
+Foi utilizado a plataforma Raspberry Pi como sistema embarcado, que irá servir
+para cominucação com o Servidor e o dispositivo de captura de temperatura.
+
+### Microcontrolador
+
+A plataforma Arduino foi escolhida para servir de ponte entre o componente
+de medição de temperatura e o sistema embarcado.
+
+### Sensor de temperatura
+
+Como sendor de temperatura foi usado o LM35 da Texas Instruments.
+A série LM35 é composta de dispositivos de circuito integrado para medição
+de temperatura com a tensão de saída linearmente proporcional a temperatura
+em graus Celcius. O sensor LM35 tem a vantagem sobre sensores
+de temperatura linear calibrados em Kelvin, devido a não ser necessário
+subtrair uma alta tensão constante da saída para obter uma escala
+conveniente \cite{lm35:2016}.
 
 ## Visualização dos dados
 
 Após captar e enviar dados do IOT para a nuvem é possível acompanhar
 os resultados pelo sistema. A forma de visualização será como mostra a
-Figura \ref{fig:view-monitor}
+Figura \ref{fig:view-monitor}.
 
 \begin{figure}[h]
-	\includegraphics[scale=0.5]{img/wm-monitor-temperature.png}
+	\centering
+	\includegraphics[scale=0.35]{img/temperature-show.png}
 	\caption{Visualização dos dados na web} \label{fig:view-monitor}
 \end{figure}
-
-# Justificativa
-
-Sendo um aplicativo de código-fonte licenciado pela GPLv3 poderá ser usado
-tanto para professores e alunos de cursos superiores e técnicos para estudo
-de microcontroladores, sistemas embarcados e afins, como para empresas ou
-pessoas que queiram interagir com seus equipamentos pessoais.
-
-A linguagem de programação escolhida foi o PHP, a qual é fácil de aprender,
-normalmente lecionada em cursos superiores e técnicos e de hospedagem barata.
-
-Outra característica a ser levada em conta é a forma de autenticação.
-Uma autenticação convencional envolve a troca de _cookies_ entre servidor
-e cliente, além de espaço em disco para guardar tais informações. Em sistemas
-IOT que se supoem que possam crescer de forma rápida, ou seja, o número
-de equipamentos pode aumentar, é necessário um sistema de autenticação capaz
-de ser escalável mesmo em condições limitadas. Para isso foi utilizado o padrão
-JWT (ou _JSON Web Tokens_), que é um padrão aberto (RFC 7519 \cite{rfc7519-2015})
-que define uma maneira compacta e auto-contida
-de transmitir de forma segura informações entre pares através de um objeto
-JSON \cite{jwt-2016}. Esta informação pode ser verificada e confirmada pois é
-assinada digitalmente. Informações JWT podem ser assinadas usando um segredo
-(com o algoritmo HMAC \cite{rfc2104-1997}) ou um par de chave pública e
-privada usando RSA \cite{rfc3447-2003}.
-
-\begin{figure}[h]
-	\includegraphics[scale=0.3]{img/jwt-diagram.png}
-	\caption{Diagrama do processo de autenticação - Fonte: https://cdn.auth0.com/content/jwt/jwt-diagram.png}
-\end{figure}
-
-# Revisão Teórica
-
-Muitas são as soluções de monitoramento de equipamentos IOT, grandes empresas
-com Oracle, Amazon, Google, Microsoft; além de outras soluções livres como
-Kaa, ThingSpeak, macchina.io, SiteWhere \cite{postscapes-iot-2016}.
-
-O grande desafio é permitir a extensão da ferramenta para necessidades específicas.
-Ferramentas com o Kaa permitem criar módulos próprios, sistemas de análises e
-modelo de dados, fazendo com que a ferramenta se adapte ao que você precisa
-\cite{kaa-2014}.
-
-De forma semelhante outras ferramentas como macchina.io oferecem opções de
-criar _bundles_ \cite{macchina.io-2016}, o ThingSpeak oferece opção de
-criar _apps_, que podem envolver visualização em gráficos e tomada de
-decisões \cite{thingspeak-2016}.
-
-Nesse sentido a ferramenta proposta possui um sistema de plugins, que são
-desenvolvidos como _Laravel Packages_ \cite{laravel-packages-2016}. Cada
-nova funcionalidade é criada através da ferramenta _Laravel_ e pode
-ser desenvolvida e habilitada localmente.
-
-A proposta é ter uma tela de acompanhamento dos dados captados do equipamento
-e a visualizaçãos ser específica. A documentação em português do brasil
-para criar um novo plugin pode ser encontrada em
-<https://sanusb-grupo.github.io/wireless-monitor/pt-br/plugin-development.html>.
-
-<!-- TODO: referenciar: https://blog.profitbricks.com/top-49-tools-internet-of-things/ -->
-
-# Cronograma
-
--------------------------------------------------------------------------------
-Tarefas                              Semana 1   Semana 2   Semana 3   Semana 4
------------------------------------  ---------  ---------  ---------  ---------
-Protótipo Inicial                        X
-
-Programação                              X          X          X
-
-Testes                                                         X          X
-
-Relatório                                X                                X
--------------------------------------------------------------------------------
-
-Table: Cronograma
