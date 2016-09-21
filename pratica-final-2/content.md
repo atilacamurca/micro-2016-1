@@ -78,6 +78,22 @@ para criar um novo plugin pode ser encontrada em
 
 <!-- TODO: referenciar: https://blog.profitbricks.com/top-49-tools-internet-of-things/ -->
 
+## Comparativo com outras ferramentas livres
+
+----------------------------------------------------------------------
+Aplicativo        Ambiente do Servidor   Suporte a plugins   SDK
+-----------       --------------------   ------------------  ----------
+Kaa               Java                     Sim                 Sim
+
+macchina.io       C++/NodeJS               Sim                 Sim
+
+SiteWhere         Java                     Sim                 Sim
+
+ThingSpeak        Ruby                     Sim                 Sim
+
+Wireless Monitor  PHP                      Sim                 Não
+----------------------------------------------------------------------
+
 # Arquitetura
 
 É necessário um Servidor, um equipamento IOT, seja ESP8266 ou Raspberry Pi com Arduino;
@@ -184,6 +200,29 @@ em graus Celcius. O sensor LM35 tem a vantagem sobre sensores
 de temperatura linear calibrados em Kelvin, devido a não ser necessário
 subtrair uma alta tensão constante da saída para obter uma escala
 conveniente \cite{lm35:2016}.
+
+## Ambiente de execução
+
+Para esse exemplo o ambiente de execução escolhido foi o NodeJS, que
+é um envólucro (_wrapper_) do ambiente de execução JavaScript de alta performance chamado V8
+usado no navegador Google Chrome. O Node permite que o V8 funcione em contextos
+diferentes do browser, na maioria das vezes fornecendo APIs adicionais
+que são otimizadas para casos específicos \cite{hughes-croucher:2012}.
+Por exemplo no caso de equipamentos IOT é perfeito, pois se trata de um
+dispositivo orientado a eventos, assim como o NodeJS.
+
+Para auxiliar na conversação entre o NodeJS e o Arduino foi usado a ferramenta
+Johnny-Five, uma plataforma livre Javascript para Robôs e IOT \cite{johnny-five:2012}.
+
+## Princípios de execução
+
+O NodeJS deve ser instalado no Raspberry Pi já que possui suporte a arquitetura ARM.
+Um projeto NodeJS deve ser criado tendo como dependências o Johnny-Five e uma biblioteca
+de resquisições HTTP, como por exemplo request \cite{request:2016}. Dessa forma
+o Johnny-Five se encarregará de se comunicar com o Arduino requisitando a temperatura
+do componente LM35. Com a resposta em mãos o NodeJS irá enviar as medições ao Servidor.
+
+<!-- TODO: colocar link para o código fonte -->
 
 ## Visualização dos dados
 
