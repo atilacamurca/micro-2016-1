@@ -222,7 +222,7 @@ de resquisições HTTP, como por exemplo request \cite{request:2016}. Dessa form
 o Johnny-Five se encarregará de se comunicar com o Arduino requisitando a temperatura
 do componente LM35. Com a resposta em mãos o NodeJS irá enviar as medições ao Servidor.
 
-<!-- TODO: colocar link para o código fonte -->
+O código fonte deste exemplo pode ser encontrado num repositório do GitHub \cite{alves:2016}.
 
 ## Visualização dos dados
 
