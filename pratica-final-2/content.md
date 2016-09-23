@@ -139,9 +139,7 @@ Para autenticar e identificar o desenvolvedor e seu _monitor_ é preciso
 enviar a `api_key` e a `monitor_key` via método _POST_ para o _endpoint_
 `/api/authenticate`. Em caso positivo o sistema irá retornar um _token_.
 Esse _token_ servirá para qualquer troca de informações futuras entre
-o equipamento IOT e o sistema. Esse método de autenticação é chamado de
-JWT ou _JSON Web Token_, um padrão internacional _RFC 7519_ para intercâmbio
-de dados entre entidades.
+o equipamento IOT e o sistema.
 
 Após ter o _token_ o desenvolvedor deve passá-lo através da _Header HTTP_
 denominada _Authorization_ usando _schema Bearer_. Algo do tipo:
@@ -205,8 +203,8 @@ conveniente \cite{lm35:2016}.
 
 Para esse exemplo o ambiente de execução escolhido foi o NodeJS, que
 é um envólucro (_wrapper_) do ambiente de execução JavaScript de alta performance chamado V8
-usado no navegador Google Chrome. O Node permite que o V8 funcione em contextos
-diferentes do browser, na maioria das vezes fornecendo APIs adicionais
+usado no navegador Google Chrome. O NodeJS permite que o V8 funcione em contextos
+diferentes do browser, principalmente fornecendo APIs adicionais
 que são otimizadas para casos específicos \cite{hughes-croucher:2012}.
 Por exemplo no caso de equipamentos IOT é perfeito, pois se trata de um
 dispositivo orientado a eventos, assim como o NodeJS.
@@ -218,9 +216,10 @@ Johnny-Five, uma plataforma livre Javascript para Robôs e IOT \cite{johnny-five
 
 O NodeJS deve ser instalado no Raspberry Pi já que possui suporte a arquitetura ARM.
 Um projeto NodeJS deve ser criado tendo como dependências o Johnny-Five e uma biblioteca
-de resquisições HTTP, como por exemplo request \cite{request:2016}. Dessa forma
+de resquisições HTTP, como por exemplo `request` \cite{request:2016}. Dessa forma
 o Johnny-Five se encarregará de se comunicar com o Arduino requisitando a temperatura
-do componente LM35. Com a resposta em mãos o NodeJS irá enviar as medições ao Servidor.
+do componente LM35. Com a resposta em mãos o NodeJS irá enviar as medições ao Servidor
+através da biblioteca `request`.
 
 O código fonte deste exemplo pode ser encontrado num repositório do GitHub \cite{alves:2016}.
 
@@ -235,3 +234,41 @@ Figura \ref{fig:view-monitor}.
 	\includegraphics[scale=0.35]{img/temperature-show.png}
 	\caption{Visualização dos dados na web} \label{fig:view-monitor}
 \end{figure}
+
+# Conclusão
+
+A partir de ferramentas livres é possível sim criar ambientes de alta
+qualidade para monitoramento de dispositivos IOT. Tanto porque grande parte
+das ferramentas livres são estáveis e bem testadas, quanto a liberdade de
+poder customizar para que a ferramenta atenda sua necessidade, não o contrário.
+
+Um passo importante e que intimida um pouco é a forma de autenticação. JWT
+é uma tecnologia muito recente e utiliza técnicas pouco convencionais para o
+público iniciante, mas temos que levar em conta que junto com o aumento do
+uso de equipamentos ligados a internet vem a necessidade de segurança na
+comunicação. Uma falha de segurança que se tornou comum nessas situações
+é chamada de _man-in-the-middle_, que pode ser definida como "Uma falha de
+segurança em um computador em que um usuário malicioso intercepta - e possivelmente
+altera - dados trafegando em uma rede" \cite{wordspy:2002}.
+Esse erro pode ocorrer simplesmente porque os vínculos entre aparelhos e 
+criptografias de proteção cedidas por um padrão normalmente não foram implementadas
+corretamente, como por exemplo em travas eletrônicas que usam
+Bluetooth Low Energy (BLE) \cite{spring:2016}.
+
+Uma prática comum para autenticação de IOTs é a criação de tokens randômicos
+para identificar o usuário e o dispositivo, entretanto essa técnica facilita
+o ataque _man-in-the-middle_. Nessa linha o uso do JWT possui vantagens quando
+comparado com um token randômico:
+
+* Chaves API randômicas não dizem nada a respeito do usuário, enquanto JWTs contém
+	informações e metadados que descrevem a identidade do usuário; contém também
+    uma validade por um período de tempo ou domínio.
+* JWT não obriga a necessidade um emissor de token centralizado ou autoridade
+	de revogação de token.
+* É compatível com Oauth2 \cite{oauth2:2012}.
+* Dados do JWT podem ser inspecionados.
+* JWTs possuem controles de expiração \cite{romero:2015}.
+
+Por fim o passo seguinte seria permitir o envio de comandos do navegador para
+o dispositivo, podendo assim controlar algumas funcionalidades remotamente como
+o acionamento de cargas, disparo de relés, entre outras funções.
