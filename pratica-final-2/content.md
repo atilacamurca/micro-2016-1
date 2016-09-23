@@ -46,7 +46,8 @@ assinada digitalmente. Informações JWT podem ser assinadas usando um segredo
 privada usando RSA \cite{rfc3447-2003}.
 
 \begin{figure}[h]
-	\includegraphics[scale=0.3]{img/jwt-diagram.png}
+	\centering
+	\includegraphics[scale=0.3]{img/jwt-diagram-grey.png}
 	\caption{Diagrama do processo de autenticação - Fonte: https://cdn.auth0.com/content/jwt/jwt-diagram.png}
 \end{figure}
 
@@ -103,7 +104,7 @@ A arquitetura segue o modelo da Figura \ref{fig:arquitetura}.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.45]{img/arquitetura.png}
+	\includegraphics[scale=0.45]{img/arquitetura-grey.png}
 	\caption{Arquitetura} \label{fig:arquitetura}
 \end{figure}
 
@@ -182,7 +183,8 @@ desenvolvimento e uso do plugin de Temperatura.
 ### Sistema embarcado linux
 
 Foi utilizado a plataforma Raspberry Pi como sistema embarcado, que irá servir
-para cominucação com o Servidor e o dispositivo de captura de temperatura.
+para cominucação com o Servidor e a plataforma Arduino. É um equipamento IOT
+capaz de interagir com outros dispositivos e com acesso a internet.
 
 ### Microcontrolador
 
@@ -221,7 +223,14 @@ o Johnny-Five se encarregará de se comunicar com o Arduino requisitando a tempe
 do componente LM35. Com a resposta em mãos o NodeJS irá enviar as medições ao Servidor
 através da biblioteca `request`.
 
-O código fonte deste exemplo pode ser encontrado num repositório do GitHub \cite{alves:2016}.
+O código fonte deste exemplo pode ser encontrado num repositório do GitHub \cite{alves:2016}
+e a montagem do projeto pode ser vista na Figura \ref{fig:montagem}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{img/montagem-grey.jpg}
+	\caption{Montagem do projeto} \label{fig:montagem}
+\end{figure}
 
 ## Visualização dos dados
 
@@ -231,7 +240,7 @@ Figura \ref{fig:view-monitor}.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.35]{img/temperature-show.png}
+	\includegraphics[scale=0.35]{img/temperature-show-grey.png}
 	\caption{Visualização dos dados na web} \label{fig:view-monitor}
 \end{figure}
 
