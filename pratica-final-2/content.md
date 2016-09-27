@@ -1,14 +1,17 @@
 # Introdução
 
-Com a crescente adoção de equipamentos IOT, como por exemplo o Raspberry Pi que
-em quase 5 anos vendeu 10 milhões de unidades pelo mundo \cite{raspberry-pi-blog:2016},
+Com a crescente adoção de equipamentos IOT (Internet of Things) 
 para monitoramento de sensores e acionamento de cargas, cresce também a necessidade
-de ambientes de acompanhamentos de tais
-medições. Para isso uma das melhores formas é usar a nuvem para fazer o
-armazenamento, já que uma das características dos equipamentos IOT é o acesso
-à internet. Para atender essa necessidade surge a ideia de criar um aplicativo
-web e livre que possa captar informações destes dispositivos e que o acesso
-possa acontecer em qualquer lugar.
+de ambientes de acompanhamentos de tais medições. Para isso uma das melhores
+formas é usar a nuvem - recurso computacional sob demanda através da
+internet \cite{ibm-cloud:2015} - para fazer o armazenamento, já que uma das características
+dos equipamentos IOT é o acesso à internet. Para atender essa necessidade surge
+a ideia de criar um aplicativo web e livre que possa captar informações destes
+dispositivos e que o acesso possa acontecer em qualquer lugar.
+
+Equipamentos IOT são dispositivos com internet que podem se interligar e se comunicar
+uns com os outros \cite{revell:2013}. Como exemplo temos o Raspberry Pi que
+em quase 5 anos já vendeu 10 milhões de unidades pelo mundo \cite{raspberry-pi-blog:2016}.
 
 # Objetivos
 
@@ -17,7 +20,7 @@ equipamentos IOT são limitados, para enviar e receber informações da
 nuvem.
 
 Para que haja melhor intercâmbio das informações tanto partindo do equipamento
-IOT quanto chegando o protocolo de comunicação escolhido foi o JSON, que segundo
+IOT quanto chegando, o protocolo de comunicação escolhido foi o JSON, que segundo
 Douglas Crockford é um formato leve e de linguagem independente para troca de
 informações \cite{crockford-2015}.
 
@@ -53,12 +56,14 @@ privada usando RSA \cite{rfc3447-2003}.
 
 # Revisão Teórica
 
-Muitas são as soluções de monitoramento de equipamentos IOT, desde grandes empresas
-como Oracle, Amazon, Google, Microsoft; até soluções livres como
+Muitas são as soluções de monitoramento de equipamentos IOT. Podemos citar
+as plataformas Oracle IOT, AWS IOT, Google Cloud IoT e Microsoft Azure IoT Suite
+que são desenvolvidas por grandes empresas como Oracle, Amazon, Google e Microsoft,
+respectivamente; até soluções livres como
 Kaa, ThingSpeak, macchina.io, SiteWhere \cite{postscapes-iot-2016}.
 
 O grande desafio é permitir a extensão da ferramenta para necessidades específicas.
-Ferramentas com o Kaa permitem criar módulos próprios, sistemas de análises e
+Ferramentas como o Kaa permitem criar módulos próprios, sistemas de análises e
 modelo de dados, fazendo com que a ferramenta se adapte ao que você precisa
 \cite{kaa-2014}.
 
@@ -73,7 +78,7 @@ nova funcionalidade é criada através da ferramenta _Laravel_ e pode
 ser desenvolvida e habilitada localmente.
 
 A proposta é ter uma tela de acompanhamento dos dados captados do equipamento
-e a visualizaçãos ser específica. A documentação em português do brasil
+que possam ser vizualizados de forma específica. A documentação em português do brasil
 para criar um novo plugin pode ser encontrada em
 <https://sanusb-grupo.github.io/wireless-monitor/pt-br/plugin-development.html>.
 
@@ -126,13 +131,13 @@ coletados e os apresenta na interface web.
 
 Imagine que o desenvolvedor queira medir a temperatura de um ambiente
 e acompanhar suas variações. Para isso ele deve criar um _Monitor_ de
-Temperatura, que apenas recebe um valor a um certo intervalo de tempo.
+Temperatura, que apenas recebe um valor em intervalos de tempo.
 Dessa forma o desenvolvedor pode acompanhar as variações ou ainda
 ver em forma de gráfico um conjunto de variações de um período de tempo
 anterior.
 
-Da mesma forma que uma chave UUID é criada para o desenvolvedor, uma
-chave é criada para o Monitor - `monitor_key`.
+De maneira análoga a criação de uma chave UUID para o desenvolvedor, uma
+chave UUID é criada para o Monitor - `monitor_key`.
 
 ## Autenticação do equipamento
 
@@ -140,7 +145,7 @@ Para autenticar e identificar o desenvolvedor e seu _monitor_ é preciso
 enviar a `api_key` e a `monitor_key` via método _POST_ para o _endpoint_
 `/api/authenticate`. Em caso positivo o sistema irá retornar um _token_.
 Esse _token_ servirá para qualquer troca de informações futuras entre
-o equipamento IOT e o sistema.
+o equipamento IOT e o \wm.
 
 Após ter o _token_ o desenvolvedor deve passá-lo através da _Header HTTP_
 denominada _Authorization_ usando _schema Bearer_. Algo do tipo:
@@ -246,10 +251,11 @@ Figura \ref{fig:view-monitor}.
 
 # Conclusão
 
-A partir de ferramentas livres é possível sim criar ambientes de alta
+A partir de ferramentas livres é possível criar ambientes de alta
 qualidade para monitoramento de dispositivos IOT. Tanto porque grande parte
-das ferramentas livres são estáveis e bem testadas, quanto a liberdade de
-poder customizar para que a ferramenta atenda sua necessidade, não o contrário.
+das ferramentas livres são estáveis e bem testadas, quanto pela liberdade de
+poder customizar para que a ferramenta atenda as necessidades dos envolvidos,
+diferentemente de ferramentas proprietárias.
 
 Um passo importante e que intimida um pouco é a forma de autenticação. JWT
 é uma tecnologia muito recente e utiliza técnicas pouco convencionais para o
@@ -277,6 +283,8 @@ comparado com um token randômico:
 * É compatível com Oauth2 \cite{oauth2:2012}.
 * Dados do JWT podem ser inspecionados.
 * JWTs possuem controles de expiração \cite{romero:2015}.
+
+# Trabalhos Futuros
 
 Por fim o passo seguinte seria permitir o envio de comandos do navegador para
 o dispositivo, podendo assim controlar algumas funcionalidades remotamente como
