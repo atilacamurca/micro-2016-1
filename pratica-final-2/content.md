@@ -5,8 +5,8 @@ em quase 5 anos vendeu 10 milhões de unidades pelo mundo \cite{raspberry-pi-blo
 para monitoramento de sensores e acionamento de cargas, cresce também a necessidade
 de ambientes de acompanhamentos de tais
 medições. Para isso uma das melhores formas é usar a nuvem para fazer o
-armazenamento, já que uma das caracteristicas dos equipamentos IOT é o acesso
-a internet. Para atender essa necessidade surge a ideia de criar um aplicativo
+armazenamento, já que uma das características dos equipamentos IOT é o acesso
+à internet. Para atender essa necessidade surge a ideia de criar um aplicativo
 web e livre que possa captar informações destes dispositivos e que o acesso
 possa acontecer em qualquer lugar.
 
@@ -184,7 +184,7 @@ desenvolvimento e uso do plugin de Temperatura.
 
 Foi utilizado a plataforma Raspberry Pi como sistema embarcado, que irá servir
 para cominucação com o Servidor e a plataforma Arduino. É um equipamento IOT
-capaz de interagir com outros dispositivos e com acesso a internet.
+capaz de interagir com outros dispositivos e com acesso à internet.
 
 ### Microcontrolador
 
@@ -193,7 +193,7 @@ de medição de temperatura e o sistema embarcado.
 
 ### Sensor de temperatura
 
-Como sendor de temperatura foi usado o LM35 da Texas Instruments.
+Como sensor de temperatura foi usado o LM35 da Texas Instruments.
 A série LM35 é composta de dispositivos de circuito integrado para medição
 de temperatura com a tensão de saída linearmente proporcional a temperatura
 em graus Celcius. O sensor LM35 tem a vantagem sobre sensores
@@ -254,7 +254,7 @@ poder customizar para que a ferramenta atenda sua necessidade, não o contrário
 Um passo importante e que intimida um pouco é a forma de autenticação. JWT
 é uma tecnologia muito recente e utiliza técnicas pouco convencionais para o
 público iniciante, mas temos que levar em conta que junto com o aumento do
-uso de equipamentos ligados a internet vem a necessidade de segurança na
+uso de equipamentos ligados à internet vem a necessidade de segurança na
 comunicação. Uma falha de segurança que se tornou comum nessas situações
 é chamada de _man-in-the-middle_, que pode ser definida como "Uma falha de
 segurança em um computador em que um usuário malicioso intercepta - e possivelmente
