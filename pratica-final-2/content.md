@@ -1,32 +1,34 @@
 # Introdução
 
-Com a crescente adoção de equipamentos IOT (Internet of Things) 
+Com a crescente adoção de equipamentos \iot (Internet of Things) 
 para monitoramento de sensores e acionamento de cargas, cresce também a necessidade
 de ambientes de acompanhamentos de tais medições. Para isso uma das melhores
 formas é usar a nuvem - recurso computacional sob demanda através da
 internet \cite{ibm-cloud:2015} - para fazer o armazenamento, já que uma das características
-dos equipamentos IOT é o acesso à internet. Para atender essa necessidade surge
+dos equipamentos \iot é o acesso à internet. Para atender essa necessidade surge
 a ideia de criar um aplicativo web e livre que possa captar informações destes
 dispositivos e que o acesso possa acontecer em qualquer lugar.
 
-Equipamentos IOT são dispositivos com internet que podem se interligar e se comunicar
+Equipamentos \iot são dispositivos com internet que podem se interligar e se comunicar
 uns com os outros \cite{revell:2013}. Como exemplo temos o Raspberry Pi que
 em quase 5 anos já vendeu 10 milhões de unidades pelo mundo \cite{raspberry-pi-blog:2016}.
 
 # Objetivos
 
-O objetivo principal do \wm é fornecer uma _api_ leve, simples e segura, visto que
-equipamentos IOT são limitados, para enviar e receber informações da
-nuvem.
+O objetivo principal do \wm é fornecer uma _API_ (_Application Program Interface_)
+leve, simples e segura, visto que equipamentos \iot são limitados, para enviar e
+receber informações da nuvem.
 
 Para que haja melhor intercâmbio das informações tanto partindo do equipamento
-IOT quanto chegando, o protocolo de comunicação escolhido foi o JSON, que segundo
+\iot quanto chegando, o protocolo de comunicação escolhido foi o JSON
+(_JavaScript Object Notation_), que segundo
 Douglas Crockford é um formato leve e de linguagem independente para troca de
-informações \cite{crockford-2015}.
+informações \cite{crockford:2015}.
 
 # Justificativa
 
-Sendo um aplicativo de código-fonte licenciado pela GPLv3 poderá ser usado
+Sendo um aplicativo de código-fonte licenciado pela GPLv3
+(GNU Public License) poderá ser usado
 tanto para professores e alunos de cursos superiores e técnicos para estudo
 de microcontroladores, sistemas embarcados e afins, como para empresas ou
 pessoas que queiram interagir com seus equipamentos pessoais.
@@ -37,7 +39,7 @@ normalmente lecionada em cursos superiores e técnicos e de hospedagem barata.
 Outra característica a ser levada em conta é a forma de autenticação.
 Uma autenticação convencional envolve a troca de _cookies_ entre servidor
 e cliente, além de espaço em disco para guardar tais informações. Em sistemas
-IOT que se supoem que possam crescer de forma rápida, ou seja, o número
+\iot que se supoem que possam crescer de forma rápida, ou seja, o número
 de equipamentos pode aumentar, é necessário um sistema de autenticação capaz
 de ser escalável mesmo em condições limitadas. Para isso foi utilizado o padrão
 JWT (ou _JSON Web Tokens_), que é um padrão aberto (RFC 7519 \cite{rfc7519-2015})
@@ -56,8 +58,8 @@ privada usando RSA \cite{rfc3447-2003}.
 
 # Revisão Teórica
 
-Muitas são as soluções de monitoramento de equipamentos IOT. Podemos citar
-as plataformas Oracle IOT, AWS IOT, Google Cloud IoT e Microsoft Azure IoT Suite
+Muitas são as soluções de monitoramento de equipamentos \iot. Podemos citar
+as plataformas Oracle \iot, AWS \iot, Google Cloud \iot e Microsoft Azure \iot Suite
 que são desenvolvidas por grandes empresas como Oracle, Amazon, Google e Microsoft,
 respectivamente; até soluções livres como
 Kaa, ThingSpeak, macchina.io, SiteWhere \cite{postscapes-iot-2016}.
@@ -102,26 +104,44 @@ Wireless Monitor  PHP                      Sim                 Não
 
 # Arquitetura
 
-É necessário um Servidor, um equipamento IOT, seja ESP8266 ou Raspberry Pi com Arduino;
+É necessário um servidor web, um equipamento \iot seja ESP8266 ou Raspberry Pi com Arduino
 e um navegador de internet no cliente.
 
 A arquitetura segue o modelo da Figura \ref{fig:arquitetura}.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.45]{img/arquitetura-grey.png}
+	\includegraphics[scale=0.5]{img/arquitetura-grey.png}
 	\caption{Arquitetura} \label{fig:arquitetura}
 \end{figure}
 
+## Servidor
+
+No servidor deve existir uma instância do \wm, que trabalha em conjunto com um banco
+de dados PostgreSQL, onde são armazenadas todas as informações.
+
+PostgreSQL é um ORDBMS (Object-relational database management system - Sistema
+de Gerenciamento de Banco de Dados Objeto-relacional) baseado no POSTGRES versão 4.2,
+desenvolvido na Universidade da Califórnia no Departamento de Ciência da Computação de
+Berkley. POSTGRES foi pioneiro em muitos conceitos que só se tornaram disponíveis em
+alguns sistemas de bancos de dados comerciais muito tempo depois \cite{postgresql:2016}.
+
 # Aplicação
 
-Vejamos um passo a passo de como o aplicativo funciona.
+Nesta seção é mostrado um passo a passo de como o aplicativo funciona.
 
 ## Cadastro do desenvolvedor
 
-O desenvolvedor inicialmente deve fazer um cadastro simples na ferramenta.
+O desenvolvedor inicialmente deve fazer um cadastro simples no \wm
+como pode ser visto na Figura \ref{fig:login-screen}.
 Esse cadastro irá criar para ele uma `api_key`, ou seja, uma chave
 única no formato UUID 4 \cite{rfc4122:2005}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{img/login-screen-grey.png}
+	\caption{Tela de Login} \label{fig:login-screen}
+\end{figure}
 
 ## Criar um _Monitor_
 
@@ -139,13 +159,22 @@ anterior.
 De maneira análoga a criação de uma chave UUID para o desenvolvedor, uma
 chave UUID é criada para o Monitor - `monitor_key`.
 
+As informações necessárias para criar um _Monitor_ de temperatura podem
+ser visualizadas na Figura \ref{fig:new-temperature-monitor}.
+
+\begin{figure}[h]
+    \centering
+	\includegraphics[scale=0.4]{img/new-temperature-monitor-grey.png}
+	\caption{Novo Monitor de Temperatura} \label{fig:new-temperature-monitor}
+\end{figure}
+
 ## Autenticação do equipamento
 
 Para autenticar e identificar o desenvolvedor e seu _monitor_ é preciso
 enviar a `api_key` e a `monitor_key` via método _POST_ para o _endpoint_
 `/api/authenticate`. Em caso positivo o sistema irá retornar um _token_.
 Esse _token_ servirá para qualquer troca de informações futuras entre
-o equipamento IOT e o \wm.
+o equipamento \iot e o \wm.
 
 Após ter o _token_ o desenvolvedor deve passá-lo através da _Header HTTP_
 denominada _Authorization_ usando _schema Bearer_. Algo do tipo:
@@ -164,6 +193,40 @@ Essa é uma forma segura e com pouco custo de memória. Além de ser
 uma forma de autenticação _stateless_, em que não são usadas sessões
 e nem mesmo _cookies_.
 
+Para testar a autenticação fora do equipamento \iot é possível utilizando
+a ferramenta `cURL`, que é uma ferramenta de linha de comando e biblioteca
+para transferência de dados com sintaxe URL \cite{curl:1996}.
+
+~~~
+curl -i -X POST \
+	-F 'api_key=fa3076b3-ddb3-421f-a0ed-303a8dd04fb8' \
+	-F 'monitor_key=e98fb37c-e79c-4a80-ac7f-b8fbdb82d48b' \
+    http://localhost:8000/api/authenticate
+~~~
+
+O servidor então responde informando o _token_:
+
+~~~
+HTTP/1.1 200 OK
+Date: Tue, 01 Oct 2016 23:34:29 GMT
+Server: Apache
+Cache-Control: no-cache
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 59
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: application/json
+
+{"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.
+eyJtb25pdG9yX2tleSI6ImU5OGZiMzdjLWU3OWMtNGE4MC1
+hYzdmLWI4ZmJkYjgyZDQ4YiIsInN1YiI6MSwiaXNzIjoiaH
+R0cDpcL1wvd2lyZWxlc3MtbW9uaXRvci5wcm92aXNvcmlvL
+ndzXC9hcGlcL2F1dGhlbnRpY2F0ZSIsImlhdCI6MTQ3NjIy
+ODg2OSwiZXhwIjoxNDc2MjMyNDY5LCJuYmYiOjE0NzYyMjg
+4NjksImp0aSI6IjhhN2IwM2UxNGMzOThlYmEwZTJjZDU0ND
+cwOTI5NDE2In0.hxuEY_F9lEg1UL0JA1FIIh0L1qw29WoMFLXAVLfeVo4"}
+~~~
+
 ## Envio dos dados
 
 Além do cabeçalho contendo o _token_ o usuário deve passar os valores
@@ -180,6 +243,17 @@ o valor, algo do tipo:
 }
 ~~~
 
+Usando o `cURL` a linha de comando deve ser algo como:
+
+~~~
+curl -i -X POST -H 'Content-Type: application/json' \
+	-H 'Authorization: Bearer <TOKEN>' \
+    -d '{"data":{"value":23.89}}' \
+    http://localhost:8000/api/send
+~~~
+
+Onde `<TOKEN>` deve ser substituído pelo _token_ recebido da autenticação.
+
 ## Descrição dos componentes
 
 Neste tópico são descritos os componentes e as ferramentas utilizadas para o
@@ -188,13 +262,18 @@ desenvolvimento e uso do plugin de Temperatura.
 ### Sistema embarcado linux
 
 Foi utilizado a plataforma Raspberry Pi como sistema embarcado, que irá servir
-para cominucação com o Servidor e a plataforma Arduino. É um equipamento IOT
+para cominucação com o \wm e a plataforma Arduino. É um equipamento \iot
 capaz de interagir com outros dispositivos e com acesso à internet.
 
 ### Microcontrolador
 
 A plataforma Arduino foi escolhida para servir de ponte entre o componente
 de medição de temperatura e o sistema embarcado.
+
+Arduino é uma plataforma livre de eletrônica baseado em _hardware_ e _software_
+fáceis de usar. Placas Arduino são capazes de ler entradas - luz em um sensor,
+controle usando botões, etc. - e converter em uma saída - acionamento de um motor,
+acionamento de um LED, publicação de dados online \cite{arduino:2016}.
 
 ### Sensor de temperatura
 
@@ -213,11 +292,11 @@ Para esse exemplo o ambiente de execução escolhido foi o NodeJS, que
 usado no navegador Google Chrome. O NodeJS permite que o V8 funcione em contextos
 diferentes do browser, principalmente fornecendo APIs adicionais
 que são otimizadas para casos específicos \cite{hughes-croucher:2012}.
-Por exemplo no caso de equipamentos IOT é perfeito, pois se trata de um
+Por exemplo no caso de equipamentos \iot é perfeito, pois se trata de um
 dispositivo orientado a eventos, assim como o NodeJS.
 
 Para auxiliar na conversação entre o NodeJS e o Arduino foi usado a ferramenta
-Johnny-Five, uma plataforma livre Javascript para Robôs e IOT \cite{johnny-five:2012}.
+Johnny-Five, uma plataforma livre Javascript para Robôs e \iot \cite{johnny-five:2012}.
 
 ## Princípios de execução
 
@@ -233,26 +312,26 @@ e a montagem do projeto pode ser vista na Figura \ref{fig:montagem}.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.4]{img/montagem-grey.jpg}
+	\includegraphics[scale=0.35]{img/montagem-grey.jpg}
 	\caption{Montagem do projeto} \label{fig:montagem}
 \end{figure}
 
 ## Visualização dos dados
 
-Após captar e enviar dados do IOT para a nuvem é possível acompanhar
+Após captar e enviar dados do \iot para a nuvem é possível acompanhar
 os resultados pelo sistema. A forma de visualização será como mostra a
 Figura \ref{fig:view-monitor}.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.35]{img/temperature-show-grey.png}
+	\includegraphics[scale=0.3]{img/temperature-show-grey.png}
 	\caption{Visualização dos dados na web} \label{fig:view-monitor}
 \end{figure}
 
 # Conclusão
 
 A partir de ferramentas livres é possível criar ambientes de alta
-qualidade para monitoramento de dispositivos IOT. Tanto porque grande parte
+qualidade para monitoramento de dispositivos \iot. Tanto porque grande parte
 das ferramentas livres são estáveis e bem testadas, quanto pela liberdade de
 poder customizar para que a ferramenta atenda as necessidades dos envolvidos,
 diferentemente de ferramentas proprietárias.
@@ -270,7 +349,7 @@ criptografias de proteção cedidas por um padrão normalmente não foram implem
 corretamente, como por exemplo em travas eletrônicas que usam
 Bluetooth Low Energy (BLE) \cite{spring:2016}.
 
-Uma prática comum para autenticação de IOTs é a criação de tokens randômicos
+Uma prática comum para autenticação de \iot's é a criação de tokens randômicos
 para identificar o usuário e o dispositivo, entretanto essa técnica facilita
 o ataque _man-in-the-middle_. Nessa linha o uso do JWT possui vantagens quando
 comparado com um token randômico:
@@ -283,8 +362,6 @@ comparado com um token randômico:
 * É compatível com Oauth2 \cite{oauth2:2012}.
 * Dados do JWT podem ser inspecionados.
 * JWTs possuem controles de expiração \cite{romero:2015}.
-
-# Trabalhos Futuros
 
 Por fim o passo seguinte seria permitir o envio de comandos do navegador para
 o dispositivo, podendo assim controlar algumas funcionalidades remotamente como

@@ -7,16 +7,6 @@
 \usepackage{caption}
 \usepackage{longtable}
 \usepackage{xspace}
-
-% -- hyperlink text
-\usepackage[colorlinks,
-  urlcolor=blue,
-  hyperindex,
-  pdfdisplaydoctitle,
-  pageanchor,
-  linkcolor=blue,
-  citecolor=blue]{hyperref}
-% -- hyperlink text
 \usepackage{url}
 
 \definecolor{this.brown}{RGB}{25,25,25}
@@ -27,23 +17,26 @@
 \newcommand{\inputccodefile}[1]{\inputminted[framesep=2pt,xleftmargin=1pt,rulecolor=\color{this.brown},tabsize=2]{c}{#1}}
 % -- syntax highlight
 \newcommand{\wm}{Wireless Monitor\xspace}
+\newcommand{\iot}{IoT\xspace}
 
 % -- This can prevent overfull boxes, but may leave too much space between words.
 \sloppy
 
-\title{Wireless Monitor - Aplicativo web livre para receber e mostrar dados vindos de equipamentos IOT}
+\title{Wireless Monitor - Aplicativo web livre para receber e mostrar dados vindos de equipamentos \iot}
 \author{Átila Camurça Alves\inst{1}}
 \address{Instituto Federal do Ceará (IFCE)}
 
 \begin{document}
 
-\maketitle
+%\maketitle
+\begin{center}
+\textbf{\large{Wireless Monitor - Aplicativo web livre para receber e mostrar dados vindos de equipamentos \iot}}
+\end{center}
 
 \begin{abstract}
 This article presents the \wm app that has the goal to allow
-embed systems developers to send data to the cloud collected by
-an IOT device and preview in a browser.
-
+embeded systems developers to send data to the cloud collected by
+an \iot device and preview in a web browser.
 In devices that use microcontrollers the figure of a monitor (screen)
 doesn't exist, which one can check the commands output e follow
 its execution, there's just serial outputs and embed wi-fi boards.
@@ -55,8 +48,7 @@ for example.
 \begin{resumo}
 Este artigo apresenta o aplicativo \wm que tem o objetivo de permitir que
 desenvolvedores de sistemas embarcados possam enviar para a nuvem
-os dados obtidos por equipamento IOT e visualizá-los no navegador.
-
+os dados obtidos por equipamento \iot e visualizá-los no navegador de internet.
 Em equipamentos que usam microcontroladores não existe a figura de
 um monitor (tela), em que se possa verificar a saída dos comandos e acompanhar
 sua execução, existem apenas saídas seriais ou placas wi-fi embutidas.
