@@ -102,12 +102,22 @@ ThingSpeak        Ruby                     Sim                 Sim
 Wireless Monitor  PHP                      Sim                 Não
 ----------------------------------------------------------------------
 
+Table: Comparativo com outras ferramentas \label{tab:comparativo}
+
+Como pode ser visto na Tabela \ref{tab:comparativo}, aplicativos como Kaa e
+SiteWhere rodam em ambiente Java, o que encarece a implantação devido a hospedagem
+ser mais cara comparada a hospedagem de aplicativos PHP, bem como o poder de
+processamento deve ser elevado visto que tal ambiente exige um servidor mais robusto.
+
 # Arquitetura
 
 É necessário um servidor web, um equipamento \iot seja ESP8266 ou Raspberry Pi com Arduino
 e um navegador de internet no cliente.
 
-A arquitetura segue o modelo da Figura \ref{fig:arquitetura}.
+A arquitetura segue o modelo da Figura \ref{fig:arquitetura}, onde temos o equipamento
+\iot que se comunica com o servidor através da internet enviando um _payload_ no formato
+JSON e o cliente que busca os dados recolhidos do servidor e exibe no navegador,
+_desktop_ ou _mobile_.
 
 \begin{figure}[h]
 	\centering
@@ -262,7 +272,7 @@ desenvolvimento e uso do plugin de Temperatura.
 ### Sistema embarcado linux
 
 Foi utilizado a plataforma Raspberry Pi como sistema embarcado, que irá servir
-para cominucação com o \wm e a plataforma Arduino. É um equipamento \iot
+para comunicação com o \wm e a plataforma Arduino. É um equipamento \iot
 capaz de interagir com outros dispositivos e com acesso à internet.
 
 ### Microcontrolador
@@ -280,7 +290,7 @@ acionamento de um LED, publicação de dados online \cite{arduino:2016}.
 Como sensor de temperatura foi usado o LM35 da Texas Instruments.
 A série LM35 é composta de dispositivos de circuito integrado para medição
 de temperatura com a tensão de saída linearmente proporcional a temperatura
-em graus Celcius. O sensor LM35 tem a vantagem sobre sensores
+em graus celsius. O sensor LM35 tem a vantagem sobre sensores
 de temperatura linear calibrados em Kelvin, devido a não ser necessário
 subtrair uma alta tensão constante da saída para obter uma escala
 conveniente \cite{lm35:2016}.
@@ -308,7 +318,8 @@ do componente LM35. Com a resposta em mãos o NodeJS irá enviar as medições a
 através da biblioteca `request`.
 
 O código fonte deste exemplo pode ser encontrado num repositório do GitHub \cite{alves:2016}
-e a montagem do projeto pode ser vista na Figura \ref{fig:montagem}.
+e a montagem do projeto pode ser vista na Figura \ref{fig:montagem}, onde temos o
+Raspberry PI (1), o Arduino (2) e o sensor de temperatura LM35 (3).
 
 \begin{figure}[h]
 	\centering
