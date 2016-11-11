@@ -148,7 +148,7 @@ Sim
 \end{minipage}
 \\\addlinespace
 \begin{minipage}[t]{0.22\columnwidth}\raggedright
-Wireless Monitor
+\wm
 \end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright
 PHP
 \end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
@@ -168,6 +168,15 @@ devido a hospedagem ser mais cara comparada a hospedagem de aplicativos
 PHP, bem como o poder de processamento deve ser elevado visto que tal
 ambiente exige um servidor mais robusto.
 
+Mesmo não possuindo um SDK (\emph{Software Development Kit}), para
+auxilizar os desenvolvedores a utilizar o \wm, mas por ter um número
+baixo de \emph{endpoint}'s e uma linguagem base bastante difundida e
+suportada por um grande número de linguagens como no caso do JSON, não é
+tão difícil criar funções de acesso a API.
+
+Os \emph{endpoint}'s e suas descrições estão documentadas em
+\url{https://sanusb-grupo.github.io/wireless-monitor/pt-br/api-endpoints/index.html}.
+
 \section{Arquitetura}\label{arquitetura}
 
 É necessário um servidor web, um equipamento \iot seja ESP8266 ou
@@ -181,7 +190,7 @@ dados recolhidos do servidor e exibe no navegador, \emph{desktop} ou
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.5]{img/arquitetura-grey.png}
+    \includegraphics[scale=0.4]{img/arquitetura-grey.png}
     \caption{Arquitetura} \label{fig:arquitetura}
 \end{figure}
 
@@ -211,7 +220,7 @@ formato UUID 4 \cite{rfc4122:2005}.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.4]{img/login-screen-grey.png}
+    \includegraphics[scale=0.35]{img/login-screen-grey.png}
     \caption{Tela de Login} \label{fig:login-screen}
 \end{figure}
 
@@ -235,7 +244,7 @@ podem ser visualizadas na Figura \ref{fig:new-temperature-monitor}.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.4]{img/new-temperature-monitor-grey.png}
+    \includegraphics[scale=0.35]{img/new-temperature-monitor-grey.png}
     \caption{Novo Monitor de Temperatura} \label{fig:new-temperature-monitor}
 \end{figure}
 
@@ -404,7 +413,7 @@ e o sensor de temperatura LM35 (3).
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.35]{img/montagem-grey.jpg}
+    \includegraphics[scale=0.3]{img/montagem-grey.jpg}
     \caption{Montagem do projeto} \label{fig:montagem}
 \end{figure}
 

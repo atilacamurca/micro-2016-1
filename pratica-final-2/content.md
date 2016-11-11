@@ -99,7 +99,7 @@ SiteWhere         Java                     Sim                 Sim
 
 ThingSpeak        Ruby                     Sim                 Sim
 
-Wireless Monitor  PHP                      Sim                 Não
+\wm               PHP                      Sim                 Não
 ----------------------------------------------------------------------
 
 Table: Comparativo com outras ferramentas \label{tab:comparativo}
@@ -108,6 +108,13 @@ Como pode ser visto na Tabela \ref{tab:comparativo}, aplicativos como Kaa e
 SiteWhere rodam em ambiente Java, o que encarece a implantação devido a hospedagem
 ser mais cara comparada a hospedagem de aplicativos PHP, bem como o poder de
 processamento deve ser elevado visto que tal ambiente exige um servidor mais robusto.
+
+Mesmo não possuindo um SDK (_Software Development Kit_), para auxilizar os desenvolvedores
+a utilizar o \wm, mas por ter um número baixo de _endpoint_'s e uma linguagem base
+bastante difundida e suportada por um grande número de linguagens como no caso do JSON,
+não é tão difícil criar funções de acesso a API.
+
+Os _endpoint_'s e suas descrições estão documentadas em <https://sanusb-grupo.github.io/wireless-monitor/pt-br/api-endpoints/index.html>.
 
 # Arquitetura
 
@@ -121,7 +128,7 @@ _desktop_ ou _mobile_.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.5]{img/arquitetura-grey.png}
+	\includegraphics[scale=0.4]{img/arquitetura-grey.png}
 	\caption{Arquitetura} \label{fig:arquitetura}
 \end{figure}
 
@@ -149,7 +156,7 @@ Esse cadastro irá criar para ele uma `api_key`, ou seja, uma chave
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.4]{img/login-screen-grey.png}
+	\includegraphics[scale=0.35]{img/login-screen-grey.png}
 	\caption{Tela de Login} \label{fig:login-screen}
 \end{figure}
 
@@ -174,7 +181,7 @@ ser visualizadas na Figura \ref{fig:new-temperature-monitor}.
 
 \begin{figure}[h]
     \centering
-	\includegraphics[scale=0.4]{img/new-temperature-monitor-grey.png}
+	\includegraphics[scale=0.35]{img/new-temperature-monitor-grey.png}
 	\caption{Novo Monitor de Temperatura} \label{fig:new-temperature-monitor}
 \end{figure}
 
@@ -323,7 +330,7 @@ Raspberry PI (1), o Arduino (2) e o sensor de temperatura LM35 (3).
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.35]{img/montagem-grey.jpg}
+	\includegraphics[scale=0.3]{img/montagem-grey.jpg}
 	\caption{Montagem do projeto} \label{fig:montagem}
 \end{figure}
 
